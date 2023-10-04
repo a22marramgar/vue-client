@@ -1,5 +1,7 @@
 <script>
-import 'bootstrap'
+import * as bootstrap from 'bootstrap';
+
+window.bootstrap = bootstrap;
 //import {getPreguntes,postData,putData,deleteData} from './communicationsManager';
 
 export default {

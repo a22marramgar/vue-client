@@ -87,7 +87,6 @@ export default {
       this.edit.resposta4 = current_film.respostes[3].any;
       this.edit.resposta_correcta = current_film.resposta_correcta;
       this.edit.URLImage = current_film.imatge;
-      console.log(this.edit);
 
     },
     confirmarEdicion() {

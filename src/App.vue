@@ -219,7 +219,7 @@ export default {
         <div class="offcanvas-body mb-3">
 
           <div class="mb-3">
-            <label for="nomPeli" class="form-label">Nombre pelicula</label>
+            <label class="form-label">Nombre pelicula</label>
             <input type="text" id="nomPeli" name="nomPeli" class="form-control" v-model="add.nomPeli">
           </div>
           <div class="mb-3">
@@ -258,7 +258,7 @@ export default {
             </div>
           </div>
           <div class="mb-3">
-            <label for="addURLImage" class="form-label">Imagen URL</label>
+            <label class="form-label">Imagen URL</label>
             <input type="text" id="addURLImage" name="addURLImage" class="form-control" v-model="add.addURLImage">
           </div>
           <button class="btn btn-primary" data-bs-dismiss="offcanvas" @click="confirmarAfegir()">Enviar</button>
@@ -338,7 +338,7 @@ export default {
           <div>
 
             <div class="mb-3">
-              <label for="nomPeli" class="form-label">Nombre pelicula</label>
+              <label class="form-label">Nombre pelicula</label>
               <input type="text" id="editNomPeli" name="nomPeli" v-model="edit.nom" class="form-control" required>
             </div>
 
@@ -379,7 +379,7 @@ export default {
             </div>
 
             <div class="mb-3">
-              <label for="URLImage" class="form-label">Imagen URL</label>
+              <label class="form-label">Imagen URL</label>
               <input type="text" id="editURLImage" name="URLImage" v-model="edit.URLImage" class="form-control" required>
             </div>
             <div class="modal-footer">

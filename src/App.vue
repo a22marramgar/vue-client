@@ -1,4 +1,5 @@
 <script>
+import bootstrap from 'bootstrap';
 //import {getPreguntes,postData,putData,deleteData} from './communicationsManager';
 
 export default {
@@ -129,6 +130,7 @@ export default {
           resposta4: '',
           addURLImage: ''
         }
+        
       });
     },
     putData(url, data = {}) {
@@ -170,7 +172,7 @@ export default {
         this.toast.title = this.erase.pregunta + ' borrado'
         this.toast.msg = 'Se ha borrado correctamente'
         const toastLiveExample = document.getElementById('liveToast')
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        const toastBootstrap = new bootstrap.Toast(toastLiveExample)
         toastBootstrap.show()
       });
       return response.json;
@@ -298,7 +300,7 @@ export default {
     </div>
   </nav>
   <!--Cards-->
-  <div class="row" style="margin-top: 4rem; margin-left: 1rem;">
+  <div class="row" style="margin-top: 4rem; margin-left: 1rem; margin-right: 0;">
     <div class="card mb-3 me-3" style="max-width: 540px; padding-left: 0;" v-for="current_film in JSONpreguntes.preguntes"
       v-if="JSONpreguntes.preguntes">
       <div class="row g-0">

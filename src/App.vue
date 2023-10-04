@@ -1,5 +1,5 @@
 <script>
-import bootstrap from 'bootstrap';
+import { Toast } from 'bootstrap';
 //import {getPreguntes,postData,putData,deleteData} from './communicationsManager';
 
 export default {
@@ -77,7 +77,7 @@ export default {
     editarPregunta(current_film) {
       
       const toastLiveExample = document.getElementById('liveToast')
-      const toastBootstrap = new bootstrap.Toast(toastLiveExample)
+      const toastBootstrap = new Toast(toastLiveExample)
       toastBootstrap.hide();
 
       this.edit.id = current_film.id;
@@ -119,7 +119,7 @@ export default {
         this.toast.title = this.add.nomPeli + ' añadido'
         this.toast.msg = 'Se ha añadido correctamente'
         const toastLiveExample = document.getElementById('liveToast')
-        const toastBootstrap = new bootstrap.Toast(toastLiveExample)
+        const toastBootstrap = new Toast(toastLiveExample)
         toastBootstrap.show()
         this.add = {
           nomPeli: '',
@@ -151,7 +151,7 @@ export default {
         this.toast.title = this.edit.nom + ' editado'
         this.toast.msg = 'Se ha editado correctamente'
         const toastLiveExample = document.getElementById('liveToast')
-        const toastBootstrap = new bootstrap.Toast(toastLiveExample)
+        const toastBootstrap = new Toast(toastLiveExample)
         toastBootstrap.show()
       });
 
@@ -172,7 +172,7 @@ export default {
         this.toast.title = this.erase.pregunta + ' borrado'
         this.toast.msg = 'Se ha borrado correctamente'
         const toastLiveExample = document.getElementById('liveToast')
-        const toastBootstrap = new bootstrap.Toast(toastLiveExample)
+        const toastBootstrap = new Toast(toastLiveExample)
         toastBootstrap.show()
       });
       return response.json;

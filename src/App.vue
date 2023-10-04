@@ -76,7 +76,7 @@ export default {
     editarPregunta(current_film) {
       
       const toastLiveExample = document.getElementById('liveToast')
-      const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+      const toastBootstrap = new bootstrap.Toast(toastLiveExample)
       toastBootstrap.hide();
 
       this.edit.id = current_film.id;
@@ -118,7 +118,7 @@ export default {
         this.toast.title = this.add.nomPeli + ' añadido'
         this.toast.msg = 'Se ha añadido correctamente'
         const toastLiveExample = document.getElementById('liveToast')
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        const toastBootstrap = new bootstrap.Toast(toastLiveExample)
         toastBootstrap.show()
         this.add = {
           nomPeli: '',
@@ -149,7 +149,7 @@ export default {
         this.toast.title = this.edit.nom + ' editado'
         this.toast.msg = 'Se ha editado correctamente'
         const toastLiveExample = document.getElementById('liveToast')
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+        const toastBootstrap = new bootstrap.Toast(toastLiveExample)
         toastBootstrap.show()
       });
 

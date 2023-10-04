@@ -1,5 +1,5 @@
 <script>
-import { getPreguntes, postData, putData, deleteData } from './communicationsManager';
+import { getPreguntes, postData, putData, deleteData, resetData } from './communicationsManager';
 
 export default {
   // Properties returned from data() become reactive state
@@ -104,19 +104,7 @@ export default {
       });
     },
     formatearArchivos() {
-      console.log("Formateando");
-      const response = fetch("https://apiservice-u435.onrender.com/formatPreguntes", {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        referrerPolicy: "no-referrer",
-        body: ""
-      }).then(() => {
-        console.log("formateado");
+      resetData().then(() => {
         this.recibirPreguntes();
       });
     }

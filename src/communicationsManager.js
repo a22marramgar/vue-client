@@ -45,3 +45,17 @@ export async function deleteData(id) {
       referrerPolicy: "no-referrer"
     })
   }
+  //Reseteo de muestra
+export async function resetData(){
+  return fetch("https://apiservice-u435.onrender.com/formatPreguntes", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        referrerPolicy: "no-referrer",
+        body: ""
+      })
+}

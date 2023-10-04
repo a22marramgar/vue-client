@@ -1,5 +1,4 @@
 <script>
-import { Toast } from 'bootstrap';
 //import {getPreguntes,postData,putData,deleteData} from './communicationsManager';
 
 export default {

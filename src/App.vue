@@ -1,5 +1,4 @@
 <script>
-
 //import {getPreguntes,postData,putData,deleteData} from './communicationsManager';
 
 export default {
@@ -48,11 +47,6 @@ export default {
         resposta_correcta: '',
         imatge: ''
       },
-      toast: {
-        status: '',
-        title: '',
-        msg: ''
-      },
       JSONpreguntes: {}
     }
   },
@@ -75,10 +69,6 @@ export default {
       console.log(this.erase);
     },
     editarPregunta(current_film) {
-      
-      const toastLiveExample = document.getElementById('liveToast')
-      const toastBootstrap = new Toast(toastLiveExample)
-      toastBootstrap.hide();
 
       this.edit.id = current_film.id;
       this.edit.nom = current_film.pregunta;
@@ -114,13 +104,6 @@ export default {
         body: JSON.stringify(data)
       }).then(() => {
         this.getPreguntes()
-
-        this.toast.status = '&#129001;'
-        this.toast.title = this.add.nomPeli + ' añadido'
-        this.toast.msg = 'Se ha añadido correctamente'
-        const toastLiveExample = document.getElementById('liveToast')
-        const toastBootstrap = new Toast(toastLiveExample)
-        toastBootstrap.show()
         this.add = {
           nomPeli: '',
           resposta1: '',
@@ -146,12 +129,6 @@ export default {
         body: JSON.stringify(data)
       }).then(() => {
         this.getPreguntes()
-        this.toast.status = '&#129001;'
-        this.toast.title = this.edit.nom + ' editado'
-        this.toast.msg = 'Se ha editado correctamente'
-        const toastLiveExample = document.getElementById('liveToast')
-        const toastBootstrap = new Toast(toastLiveExample)
-        toastBootstrap.show()
       });
 
       return response.json;
@@ -167,12 +144,6 @@ export default {
         referrerPolicy: "no-referrer"
       }).then(() => {
         this.getPreguntes()
-        this.toast.status = '&#129001;'
-        this.toast.title = this.erase.pregunta + ' borrado'
-        this.toast.msg = 'Se ha borrado correctamente'
-        const toastLiveExample = document.getElementById('liveToast')
-        const toastBootstrap = new Toast(toastLiveExample)
-        toastBootstrap.show()
       });
       return response.json;
     },
@@ -299,7 +270,7 @@ export default {
     </div>
   </nav>
   <!--Cards-->
-  <div class="row" style="margin-top: 4rem; margin-left: 1rem;">
+  <div class="row" style="margin-top: 4rem; margin-left: 1rem; margin-right: 0;">
     <div class="card mb-3 me-3" style="max-width: 540px; padding-left: 0;" v-for="current_film in JSONpreguntes.preguntes"
       v-if="JSONpreguntes.preguntes">
       <div class="row g-0">
@@ -390,19 +361,6 @@ export default {
           </div>
         </div>
 
-      </div>
-    </div>
-  </div>
-  <!--Toast-->
-  <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <span v-html="toast.status" class="me-1"></span>
-        <strong class="me-auto">{{ toast.title }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        {{ toast.msg }}
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <script>
-//import {getPreguntes,postData,putData,deleteData} from './communicationsManager';
+import { getPreguntes, postData, putData, deleteData } from './communicationsManager';
 
 export default {
   // Properties returned from data() become reactive state
@@ -51,22 +51,14 @@ export default {
     }
   },
   created() {
-    this.getPreguntes();
+    this.recibirPreguntes()
   },
 
   // Methods are functions that mutate state and trigger updates.
   // They can be bound as event handlers in templates.
   methods: {
-    confirmarAfegir() {
-      this.postData("https://apiservice-u435.onrender.com/afegirPregunta", this.add);
-    },
-    confirmarEliminacion() {
-      this.deleteData("https://apiservice-u435.onrender.com/delete/" + this.erase.id);
-      this.getPreguntes();
-    },
     eliminarPregunta(current_film) {
       this.erase = current_film;
-      console.log(this.erase);
     },
     editarPregunta(current_film) {
 
@@ -80,30 +72,16 @@ export default {
       this.edit.URLImage = current_film.imatge;
 
     },
-    confirmarEdicion() {
-      this.putData("https://apiservice-u435.onrender.com/update/" + this.edit.id, this.edit);
-    },
-    getPreguntes() {
-      fetch('https://apiservice-u435.onrender.com/getPreguntes')
-        .then((response) => response.json())
+    recibirPreguntes() {
+      getPreguntes().then((response) => response.json())
         .then((data) => {
           this.JSONpreguntes = data;
         });
     },
-    postData(url, data = {}) {
-      console.log("postdata called");
-      const response = fetch(url, {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        referrerPolicy: "no-referrer",
-        body: JSON.stringify(data)
-      }).then(() => {
-        this.getPreguntes()
+    afegirPregunta() {
+      postData(this.add).then(() => {
+        this.recibirPreguntes()
+
         this.add = {
           nomPeli: '',
           resposta1: '',
@@ -115,41 +93,19 @@ export default {
         }
       });
     },
-    putData(url, data = {}) {
-      console.log("putdata called");
-      const response = fetch(url, {
-        method: "PUT",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        referrerPolicy: "no-referrer",
-        body: JSON.stringify(data)
-      }).then(() => {
-        this.getPreguntes()
+    updatePregunta() {
+      putData(this.edit).then(() => {
+        this.recibirPreguntes()
       });
-
-      return response.json;
     },
-    deleteData(url) {
-      console.log("deletedata called");
-      const response = fetch(url, {
-        method: "DELETE",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "same-origin",
-        redirect: "follow",
-        referrerPolicy: "no-referrer"
-      }).then(() => {
-        this.getPreguntes()
+    deletePregunta() {
+      deleteData(this.erase.id).then(() => {
+        this.recibirPreguntes()
       });
-      return response.json;
     },
-    formatearArchivos(){
+    formatearArchivos() {
       console.log("Formateando");
-      const response = fetch("https://apiservice-u435.onrender.com/formatPreguntes",{
+      const response = fetch("https://apiservice-u435.onrender.com/formatPreguntes", {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -161,7 +117,7 @@ export default {
         body: ""
       }).then(() => {
         console.log("formateado");
-        this.getPreguntes();
+        this.recibirPreguntes();
       });
     }
 
@@ -233,7 +189,7 @@ export default {
             <label class="form-label">Imagen URL</label>
             <input type="text" id="addURLImage" name="addURLImage" class="form-control" v-model="add.addURLImage">
           </div>
-          <button class="btn btn-primary" data-bs-dismiss="offcanvas" @click="confirmarAfegir()">Enviar</button>
+          <button class="btn btn-primary" data-bs-dismiss="offcanvas" @click="this.afegirPregunta()">Enviar</button>
         </div>
       </div>
       <!--Offcanvas End-->
@@ -356,7 +312,7 @@ export default {
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button @click="confirmarEdicion()" data-bs-dismiss="modal" class="btn btn-primary">Editar cambios</button>
+              <button @click="updatePregunta()" data-bs-dismiss="modal" class="btn btn-primary">Editar cambios</button>
             </div>
           </div>
         </div>
@@ -375,7 +331,7 @@ export default {
           <div class="toast-body">De verdad desea eliminar {{ this.erase.pregunta }}? <br>Ten en cuenta que esta acción es
             irreversible</div><br>
           <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
-          <button class="btn btn-danger" data-bs-dismiss="modal" @click="confirmarEliminacion()">Eliminar
+          <button class="btn btn-danger" data-bs-dismiss="modal" @click="deletePregunta()">Eliminar
             pregunta</button>
         </div>
       </div>

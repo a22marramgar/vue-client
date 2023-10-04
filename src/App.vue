@@ -74,7 +74,7 @@ export default {
       console.log(this.erase);
     },
     editarPregunta(current_film) {
-      console.log(current_film);
+      
       const toastLiveExample = document.getElementById('liveToast')
       const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
       toastBootstrap.hide();
@@ -87,7 +87,7 @@ export default {
       this.edit.resposta4 = current_film.respostes[3].any;
       this.edit.resposta_correcta = current_film.resposta_correcta;
       this.edit.URLImage = current_film.imatge;
-
+      console.log(this.edit);
 
     },
     confirmarEdicion() {

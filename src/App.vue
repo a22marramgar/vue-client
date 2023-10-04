@@ -177,7 +177,7 @@ export default {
     },
     formatearArchivos(){
       console.log("Formateando");
-      const response = fetch("http://localhost:3000/formatPreguntes",{
+      const response = fetch("https://apiservice-u435.onrender.com/formatPreguntes",{
         method: "POST",
         mode: "cors",
         cache: "no-cache",

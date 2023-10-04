@@ -74,6 +74,7 @@ export default {
       console.log(this.erase);
     },
     editarPregunta(current_film) {
+      console.log(current_film);
       const toastLiveExample = document.getElementById('liveToast')
       const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
       toastBootstrap.hide();

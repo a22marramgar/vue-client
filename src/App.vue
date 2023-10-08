@@ -1,5 +1,5 @@
 <script>
-import { getPreguntes, postData, putData, deleteData, resetData } from './communicationsManager';
+import { getPreguntes, postData, putData, deleteData, resetData, getStats } from './communicationsManager';
 
 export default {
   // Properties returned from data() become reactive state
@@ -47,7 +47,8 @@ export default {
         resposta_correcta: '',
         imatge: ''
       },
-      JSONpreguntes: {}
+      JSONpreguntes: {},
+      stats: {}
     }
   },
   created() {
@@ -57,6 +58,12 @@ export default {
   // Methods are functions that mutate state and trigger updates.
   // They can be bound as event handlers in templates.
   methods: {
+    recibirStats() {
+      getStats().then((response) => response.json())
+        .then((data) => {
+          this.stats = data;
+        });
+    },
     eliminarPregunta(current_film) {
       this.erase = current_film;
     },
@@ -107,6 +114,23 @@ export default {
       resetData().then(() => {
         this.recibirPreguntes();
       });
+    },
+    buscarNombrePelicula(id, value) {
+      let number = parseInt(id);
+      if (Number.isNaN(number)){
+        let extras = ""
+        if(id.includes("Tiempo")){
+          value = value.toLocaleString(undefined, {maximumFractionDigits: 2})
+          extras = " segundos"
+        }
+        return id +": "+value + extras;
+      } 
+      let nomPelicula = "pelicula desconocida"
+      for (let pregunta of this.JSONpreguntes.preguntes) {
+        console.log(pregunta.id, number, pregunta.id == number)
+        if (pregunta.id == number) nomPelicula = pregunta.pregunta;
+      }
+      return nomPelicula +": "+value+"% de aciertos"
     }
 
   }
@@ -196,8 +220,8 @@ export default {
                 Estadísticas
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#statsModal" @click="recibirStats()"
+                    href="#">Ver estadísticas</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
@@ -321,6 +345,27 @@ export default {
           <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
           <button class="btn btn-danger" data-bs-dismiss="modal" @click="deletePregunta()">Eliminar
             pregunta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Stats Modal-->
+  <div class="modal fade" id="statsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="eliminarModalLabel">Estadísticas</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="toast-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" v-for="(value, key) in stats">
+                <p>{{ buscarNombrePelicula(key,value) }}</p>
+              </li>
+            </ul>
+            <button type="button" class="btn btn-primary me-2" data-bs-dismiss="modal">Aceptar</button>
+          </div><br>
         </div>
       </div>
     </div>

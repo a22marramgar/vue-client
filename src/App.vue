@@ -239,7 +239,7 @@ export default {
   </nav>
   <!--Cards-->
   <div class="row" style="margin-top: 4rem; margin-left: 1rem; margin-right: 0;">
-    <div class="card mb-3 me-3" style="max-width: 540px; padding-left: 0;" v-for="current_film in JSONpreguntes.preguntes"
+    <div class="card shadow-sm mb-3 me-3" style="max-width: 540px; padding-left: 0;" v-for="current_film in JSONpreguntes.preguntes"
       v-if="JSONpreguntes.preguntes">
       <div class="row g-0">
         <div class="col-md-4">
